@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Portfolio — Elia Lenert Volschenk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #fafaf8;
+  --white:     #ffffff;
+  --ink:       #1a1a1a;
+  --ink2:      #3d3d3d;
+  --muted:     #7a7a7a;
+  --line:      #e8e8e4;
+  --accent:    #2c5f8a;
+  --accent-lt: #edf3f8;
+  --tag-bg:    #f2f2ef;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Outfit', sans-serif;
+  --max:        1080px;
+  --r:          6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 2.5rem; }
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+}
+h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,250,248,0.92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-lt);
+  border: 1px solid rgba(44,95,138,0.2);
+  border-radius: var(--r);
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--accent); color: #fff; }
+
+/* ── HERO ── */
+#hero {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+}
+.hero-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-carousel input {
+  display: none;
+}
+.hero-slides {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+.hero-slide {
+  width: 33.333%;
+  height: 100%;
+}
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#hero-slide1:checked ~ .hero-slides { transform: translateX(0); }
+#hero-slide2:checked ~ .hero-slides { transform: translateX(-33.333%); }
+#hero-slide3:checked ~ .hero-slides { transform: translateX(-66.666%); }
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 4rem;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  text-align: center;
+  z-index: 1;
+}
+.hero-overlay h2 {
+  
+  background: radial-gradient(circle,rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+  padding: 1rem 2rem;
+  border-radius: var(--r);
+}
+
+/* ── PROJECT ── */
+#project {
+  padding: 5rem 2.5rem 5rem;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .project-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.project-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.detail-item {
+  background: var(--white);
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+.detail-item .label { margin-bottom: 0.5rem; }
+.detail-item .value {
+  font-size: 1rem;
+  color: var(--ink2);
+}
+
+/* ── CAROUSEL ── */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--r);
+  border: 1px solid var(--line);
+}
+.slides {
+  display: flex;
+  width: 300%;
+  transition: transform 0.5s ease;
+}
+.slide {
+  width: 33.333%;
+  flex-shrink: 0;
+}
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.carousel input {
+  display: none;
+}
+#slide1:checked ~ .slides { transform: translateX(0); }
+#slide2:checked ~ .slides { transform: translateX(-33.333%); }
+#slide3:checked ~ .slides { transform: translateX(-66.666%); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--r);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #1e4a6e; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--ink2); border-color: var(--line); }
+.btn-outline:hover { border-color: #bbb; transform: translateY(-1px); }
+.back-btn {
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Elia Volschenk</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Portfolio</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:volschenkeliusa@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-carousel">
+    <input type="radio" name="hero-slides" id="hero-slide1" checked>
+    <input type="radio" name="hero-slides" id="hero-slide2">
+    <input type="radio" name="hero-slides" id="hero-slide3">
+    <div class="hero-slides">
+      <div class="hero-slide">
+        <img src="./src/img/Gemini_Generated_Image_9rg1i39rg1i39rg1.png" alt="Hero Image 1">
+      </div>
+      <div class="hero-slide">
+        <img src="./src/img/Gemini_Generated_Image_9rg1i39rg1i39rg1.png" alt="Hero Image 2">
+      </div>
+      <div class="hero-slide">
+        <img src="./src/img/Gemini_Generated_Image_9rg1i39rg1i39rg1.png" alt="Hero Image 3">
+      </div>
+    </div>
+  </div>
+  <div class="hero-overlay">
+    <div class="container">
+      <h2>Project Name</h2>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECT ══ -->
+<section id="project">
+  <div class="container">
+    <div class="project-grid">
+      <div class="project-main">
+        <p class="description">This is a detailed description of the project. Explain what the project is about, the challenges faced, technologies used, and the outcomes achieved. This section should provide a comprehensive overview to give insights into the project.</p>
+        
+        <!-- Carousel -->
+        <div class="carousel">
+          <input type="radio" name="slides" id="slide1" checked>
+          <input type="radio" name="slides" id="slide2">
+          <input type="radio" name="slides" id="slide3">
+          <!-- <div class="slides">
+            <div class="slide">
+              <img src="./src/img/Gemini_Generated_Image_9rg1i39rg1i39rg1.png" alt="Project Image 1">
+            </div>
+            <div class="slide">
+              <img src="./src/img/Gemini_Generated_Image_9rg1i39rg1i39rg1.png" alt="Project Image 2">
+            </div>
+            <div class="slide">
+              <img src="./src/img/Gemini_Generated_Image_9rg1i39rg1i39rg1.png" alt="Project Image 3">
+            </div>
+          </div> -->
+        </div>
+        
+        <a href="#" class="btn btn-primary">View Project</a>
+      </div>
+      
+      <div class="project-details">
+        <div class="detail-item">
+          <span class="label">Team Size</span>
+          <div class="value">5 members</div>
+        </div>
+        <div class="detail-item">
+          <span class="label">Delivery Timeline</span>
+          <div class="value">3 months (Jan 2023 - Mar 2023)</div>
+        </div>
+        <div class="detail-item">
+          <span class="label">Primary Role Function</span>
+          <div class="value">Scrum Master</div>
+        </div>
+      </div>
+    </div>
+    
+    <a href="index.html" class="btn btn-outline back-btn">← Back to Main Page</a>
+  </div>
+</section>
+
+<script>
+let currentSlide = 1;
+setInterval(() => {
+  currentSlide = currentSlide % 3 + 1;
+  document.getElementById('slide' + currentSlide).checked = true;
+  document.getElementById('hero-slide' + currentSlide).checked = true;
+}, 4000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elia Volschenk — Agile Scrum Master</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #fafaf8;
+  --white:     #ffffff;
+  --ink:       #1a1a1a;
+  --ink2:      #3d3d3d;
+  --muted:     #7a7a7a;
+  --line:      #e8e8e4;
+  --accent:    #2c5f8a;
+  --accent-lt: #edf3f8;
+  --tag-bg:    #f2f2ef;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Outfit', sans-serif;
+  --max:        1080px;
+  --r:          6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 2.5rem; }
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,250,248,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-lt);
+  border: 1px solid rgba(44,95,138,0.2);
+  border-radius: var(--r);
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--accent); color: #fff; }
+
+/* ── HERO ── */
+#hero {
+  padding: 10rem 2.5rem 7rem;
+  border-bottom: 1px solid var(--line);
+}
+.hero-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: end;
+}
+.hero-available {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #2e7d4f;
+  background: #edf7f1;
+  border: 1px solid rgba(46,125,79,0.2);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 1.8rem;
+  animation: fadeUp 0.5s ease both;
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #2e7d4f;
+  animation: blink 2.2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+h1 .role { display: block; color: var(--accent); }
+.hero-bio {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 2.2rem;
+  font-weight: 300;
+  animation: fadeUp 0.5s 0.16s ease both;
+}
+.hero-actions {
+  display: flex; gap: 0.8rem; flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.24s ease both;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--r);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #1e4a6e; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--ink2); border-color: var(--line); }
+.btn-outline:hover { border-color: #bbb; transform: translateY(-1px); }
+
+.hero-aside { animation: fadeUp 0.5s 0.32s ease both; }
+.hero-stats {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  padding: 1.8rem 2rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 200px;
+}
+.hs-item .hs-num {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+.hs-item .hs-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+.hs-divider { height: 1px; background: var(--line); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.hero-profile-pic {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.hero-profile-pic img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--line);
+}
+
+/* ── SECTIONS ── */
+section { padding: 5.5rem 0; border-bottom: 1px solid var(--line); }
+.section-head { margin-bottom: 3rem; }
+
+/* ── ABOUT ── */
+#about { background: var(--white); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.about-body p { color: var(--ink2); margin-bottom: 1rem; font-size: 0.98rem; }
+.about-body p strong { font-weight: 500; color: var(--ink); }
+.about-body p:last-child { margin-bottom: 0; }
+.cert-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 10px; }
+.cert-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0.7rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink2);
+}
+.cert-item::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── SKILLS ── */
+#skills { background: var(--bg); }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.skill-block {
+  background: var(--white);
+  padding: 1.8rem 2rem;
+  transition: background 0.2s;
+}
+.skill-block:hover { background: var(--accent-lt); }
+.skill-block h3 {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  background: var(--tag-bg);
+  color: var(--ink2);
+  font-size: 0.78rem;
+  font-weight: 300;
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+/* ── EXPERIENCE ── */
+#experience { background: var(--white); }
+.tl-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 2.5rem;
+  padding: 2.2rem 0;
+  border-top: 1px solid var(--line);
+}
+.tl-item:first-child { border-top: none; }
+.tl-date { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+.tl-current {
+  display: inline-block; margin-top: 6px;
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #2e7d4f; background: #edf7f1;
+  border: 1px solid rgba(46,125,79,0.2);
+  border-radius: 999px; padding: 2px 9px;
+}
+.tl-role {
+  font-family: var(--font-serif);
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 4px;
+}
+.tl-company { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; }
+.tl-desc { font-size: 0.9rem; color: var(--ink2); line-height: 1.7; }
+
+/* ── PROJECTS ── */
+#projects { background: var(--bg); }
+.projects-intro { font-size: 0.92rem; color: var(--muted); max-width: 540px; margin-top: 0.5rem; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+/* PROJECT CARD
+   To add a project: copy one .project-card block, paste inside .projects-grid, update content.
+   Badge options: badge-blue (delivered), badge-green (live), badge-amber (in progress), badge-gray (internal) */
+.project-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.6rem 1.8rem;
+  display: flex; flex-direction: column;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.project-card:hover {
+  border-color: rgba(44,95,138,0.3);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.pc-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 1rem;
+  margin-bottom: 1rem;
+}
+.pc-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px; background: var(--accent-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.pc-badges { display: flex; flex-wrap: wrap; gap: 5px; }
+.badge {
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; border: 1px solid;
+}
+.badge-blue   { color: var(--accent);  border-color: rgba(44,95,138,0.25);  background: var(--accent-lt); }
+.badge-green  { color: #2e7d4f;        border-color: rgba(46,125,79,0.25);  background: #edf7f1; }
+.badge-amber  { color: #8a5c00;        border-color: rgba(138,92,0,0.25);   background: #fdf6e3; }
+.badge-gray   { color: var(--muted);   border-color: var(--line);            background: var(--tag-bg); }
+
+.pc-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.4rem;
+}
+.pc-desc {
+  font-size: 0.86rem; color: var(--muted);
+  line-height: 1.65; flex: 1; margin-bottom: 1.2rem;
+}
+.pc-footer {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding-top: 1rem; border-top: 1px solid var(--line);
+  font-size: 0.76rem; color: var(--muted);
+}
+.pc-meta { display: flex; align-items: center; gap: 5px; }
+.pc-meta svg { opacity: 0.45; flex-shrink: 0; }
+.pc-link {
+  margin-left: auto; font-size: 0.76rem; font-weight: 500;
+  color: var(--accent); text-decoration: none;
+  transition: opacity 0.2s;
+}
+.pc-link:hover { opacity: 0.7; }
+
+/* ── CONTACT ── */
+#contact { background: var(--white); border-bottom: none; }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+}
+.contact-body {
+  font-size: 0.95rem; color: var(--muted);
+  line-height: 1.75; margin-top: 1rem; max-width: 380px;
+}
+.contact-links { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: var(--r); font-size: 0.86rem;
+  font-weight: 400; color: var(--ink2); text-decoration: none;
+  transition: all 0.18s;
+}
+.contact-link:hover { border-color: rgba(44,95,138,0.3); color: var(--accent); background: var(--accent-lt); }
+.contact-link svg { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; transition: color 0.18s; }
+.contact-link:hover svg { color: var(--accent); }
+.contact-link span { flex: 1; }
+.contact-link .arrow { font-size: 0.75rem; opacity: 0.4; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 1.8rem 2.5rem;
+  max-width: calc(var(--max) + 5rem);
+  margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.78rem; color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .tl-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  .nav-links { display: none; }
+}
+@media (max-width: 560px) {
+  .container { padding: 0 1.2rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  #hero { padding: 8rem 1.2rem 5rem; }
+  footer { padding: 1.5rem 1.2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-name">Alex Morgan</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:alex@example.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-available"><div class="dot"></div> Open to new opportunities</div>
+      <h1>Certified<br><span class="role">Scrum Master.</span></h1>
+      <p class="hero-bio">I help software teams deliver with confidence — building the structures, trust, and clarity that let great work happen consistently.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#" class="btn btn-outline">Download CV</a>
+      </div>
+    </div>
+    <div class="hero-aside">
+      <div class="hero-profile-pic">
+        <img src="https://via.placeholder.com/150x150" alt="Profile Picture">
+      </div>
+      <!-- Edit these stats to match your own -->
+      <div class="hero-stats">
+        <div class="hs-item">
+          <div class="hs-num">6+</div>
+          <div class="hs-label">Years as Scrum Master</div>
+        </div>
+        <div class="hs-divider"></div>
+        <div class="hs-item">
+          <div class="hs-num">12</div>
+          <div class="hs-label">Projects delivered</div>
+        </div>
+        <div class="hs-divider"></div>
+        <div class="hs-item">
+          <div class="hs-num">98%</div>
+          <div class="hs-label">Sprint goal completion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-body">
+        <span class="label">About</span>
+        <h2 style="margin-bottom:1.4rem;">Turning complexity<br>into consistent delivery.</h2>
+        <p>I'm <strong>Alex Morgan</strong>, a certified Scrum Master based in [Your City]. I partner with software development teams to establish healthy agile practices — not by the book, but in ways that actually fit how the team works.</p>
+        <p>Over the past six years I've embedded with teams ranging from 6-person startups to 40+ person enterprise programmes, facilitating ceremonies, removing blockers, and coaching individuals at every level.</p>
+        <p>My focus is always the same: help people do their best work, together, reliably.</p>
+      </div>
+      <div>
+        <span class="label">Certifications</span>
+        <!-- Add or remove .cert-item rows here -->
+        <div class="cert-list">
+          <div class="cert-item">Certified Scrum Master (CSM)</div>
+          <div class="cert-item">Professional Scrum Master II (PSM II)</div>
+          <div class="cert-item">SAFe 6 Scrum Master</div>
+          <div class="cert-item">PMI Agile Certified Practitioner (PMI-ACP)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Expertise</span>
+      <h2>Skills &amp; tools.</h2>
+    </div>
+    <!-- Edit skill-block entries freely. Add more blocks as needed. -->
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h3>Frameworks</h3>
+        <div class="tags">
+          <span class="tag">Scrum</span><span class="tag">Kanban</span><span class="tag">SAFe</span>
+          <span class="tag">LeSS</span><span class="tag">Scrumban</span><span class="tag">XP</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Facilitation</h3>
+        <div class="tags">
+          <span class="tag">Sprint Planning</span><span class="tag">Retrospectives</span>
+          <span class="tag">Sprint Review</span><span class="tag">PI Planning</span>
+          <span class="tag">Daily Standup</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Tools</h3>
+        <div class="tags">
+          <span class="tag">Jira</span><span class="tag">Confluence</span>
+          <span class="tag">Azure DevOps</span><span class="tag">Miro</span><span class="tag">Notion</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Leadership</h3>
+        <div class="tags">
+          <span class="tag">Team Coaching</span><span class="tag">Servant Leadership</span>
+          <span class="tag">Conflict Resolution</span><span class="tag">Stakeholder Mgmt</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Metrics</h3>
+        <div class="tags">
+          <span class="tag">Velocity</span><span class="tag">Burndown</span>
+          <span class="tag">Cycle Time</span><span class="tag">Lead Time</span><span class="tag">DORA</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Methodologies</h3>
+        <div class="tags">
+          <span class="tag">Design Thinking</span><span class="tag">Lean</span>
+          <span class="tag">DevOps</span><span class="tag">OKRs</span><span class="tag">Continuous Delivery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Career</span>
+      <h2>Work experience.</h2>
+    </div>
+    <!-- Add .tl-item blocks for additional roles. Most recent first. -->
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">2021 — Present</div>
+          <span class="tl-current">Current</span>
+        </div>
+        <div>
+          <div class="tl-role">Senior Scrum Master</div>
+          <div class="tl-company">Acme Software Corp &middot; Full-time</div>
+          <div class="tl-desc">Leading agile delivery for multiple cross-functional teams building cloud-native enterprise software. Coaching teams and leadership on agile principles and driving continuous improvement. Reduced average cycle time by 35%.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">2019 — 2021</div>
+        </div>
+        <div>
+          <div class="tl-role">Scrum Master</div>
+          <div class="tl-company">NovaTech Solutions &middot; Full-time</div>
+          <div class="tl-desc">Embedded Scrum Master for two product teams delivering B2B SaaS platforms. Introduced team health checks that improved satisfaction scores by 28% and reduced attrition.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">2017 — 2019</div>
+        </div>
+        <div>
+          <div class="tl-role">Junior Scrum Master &amp; Business Analyst</div>
+          <div class="tl-company">PixelBridge Digital &middot; Full-time</div>
+          <div class="tl-desc">Supported delivery of four web products from discovery through launch, developing strong skills in stakeholder communication, backlog management, and agile facilitation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Portfolio</span>
+      <h2>Featured projects.</h2>
+      <p class="projects-intro">A selection of projects I've led or supported at Acme Software Corp. Each card reflects the scope, team size, and outcome.</p>
+    </div>
+    <div class="projects-grid">
+
+      <!-- PROJECT CARD — copy this block to add a new project -->
+      <div class="project-card">
+        <div class="pc-top">
+          <div class="pc-icon">🚀</div>
+          <div class="pc-badges">
+            <span class="badge badge-blue">Delivered</span>
+            <span class="badge badge-gray">SAFe</span>
+          </div>
+        </div>
+        <div class="pc-name">Project Aurora</div>
+        <div class="pc-desc">Cloud migration initiative — legacy monolith to microservices. Coordinated 3 Scrum teams across 8 sprints with zero production incidents at launch.</div>
+        <div class="pc-footer">
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            12 months
+          </span>
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            3 teams · 24 devs
+          </span>
+          <a href="#" class="pc-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-top">
+          <div class="pc-icon">📊</div>
+          <div class="pc-badges"><span class="badge badge-blue">Delivered</span></div>
+        </div>
+        <div class="pc-name">DataStream Portal</div>
+        <div class="pc-desc">Internal analytics dashboard for 500+ stakeholders. Design sprints reduced engineering rework by 40%. Delivered 2 weeks ahead of schedule.</div>
+        <div class="pc-footer">
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6 months
+          </span>
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            1 team · 8 devs
+          </span>
+          <a href="#" class="pc-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-top">
+          <div class="pc-icon">🔐</div>
+          <div class="pc-badges">
+            <span class="badge badge-amber">In progress</span>
+            <span class="badge badge-gray">Enterprise</span>
+          </div>
+        </div>
+        <div class="pc-name">SecureID Platform</div>
+        <div class="pc-desc">Identity & access management platform for Fortune 500 clients. Managing dependencies across 5 teams in a scaled SAFe environment with quarterly PI planning.</div>
+        <div class="pc-footer">
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            18 months+
+          </span>
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            5 teams · 40 devs
+          </span>
+          <a href="#" class="pc-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-top">
+          <div class="pc-icon">📱</div>
+          <div class="pc-badges"><span class="badge badge-green">Live</span></div>
+        </div>
+        <div class="pc-name">Mobile Commerce App</div>
+        <div class="pc-desc">Consumer mobile app (iOS & Android). Introduced CD pipeline with DevOps team, compressing release cadence from monthly to weekly deployments.</div>
+        <div class="pc-footer">
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            9 months
+          </span>
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            2 teams · 14 devs
+          </span>
+          <a href="#" class="pc-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-top">
+          <div class="pc-icon">🤖</div>
+          <div class="pc-badges">
+            <span class="badge badge-amber">Discovery</span>
+            <span class="badge badge-gray">Internal</span>
+          </div>
+        </div>
+        <div class="pc-name">AI Ops Tooling</div>
+        <div class="pc-desc">Discovery phase for an AI-assisted operations tool. Running hypothesis-driven sprints to define MVP scope, aligning product, engineering, and data science teams.</div>
+        <div class="pc-footer">
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            3 months
+          </span>
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            1 team · 6 devs
+          </span>
+          <a href="#" class="pc-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="pc-top">
+          <div class="pc-icon">🏗️</div>
+          <div class="pc-badges"><span class="badge badge-blue">Delivered</span></div>
+        </div>
+        <div class="pc-name">Core Platform Rebrand</div>
+        <div class="pc-desc">Full redesign of the flagship SaaS product across design, frontend, and QA squads. Cross-team retrospectives maintained morale during an intensive 6-month delivery push.</div>
+        <div class="pc-footer">
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6 months
+          </span>
+          <span class="pc-meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            3 teams · 20 devs
+          </span>
+          <a href="#" class="pc-link">Details →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="label">Contact</span>
+        <h2>Let's talk.</h2>
+        <p class="contact-body">Open to senior Scrum Master, Agile Coach, and Delivery Lead roles. Always happy to have a conversation about agile, teams, or your organisation's challenges — no commitment required.</p>
+      </div>
+      <div>
+        <!-- Edit href values with your real links -->
+        <div class="contact-links">
+          <a href="mailto:alex@example.com" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>alex@example.com</span><span class="arrow">↗</span>
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>LinkedIn profile</span><span class="arrow">↗</span>
+          </a>
+          <a href="https://github.com/yourhandle" target="_blank" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <span>GitHub</span><span class="arrow">↗</span>
+          </a>
+          <a href="#" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Download CV</span><span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span>© 2026 Alex Morgan. All rights reserved.</span>
+  <span>Hosted on GitHub Pages</span>
+</footer>
+
+</body>
+</html>
